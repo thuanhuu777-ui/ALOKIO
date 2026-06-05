@@ -65,9 +65,9 @@
     justify-content: center;
   }
 
-  /* Video: 2 cột trên tablet */
-  .video-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* Video carousel: 2 video / khung nhìn trên tablet */
+  .video-slide {
+    flex-basis: 50%;
   }
 
   /* Liên hệ: 2 cột info, form + map xếp dọc */
@@ -140,9 +140,14 @@
     font-size: 1.15rem;
   }
 
-  /* Video: 1 cột trên mobile */
-  .video-grid {
-    grid-template-columns: 1fr;
+  /* Video carousel: 1 video / khung nhìn trên mobile */
+  .video-slide {
+    flex-basis: 100%;
+  }
+
+  .video-carousel__btn {
+    width: 36px;
+    height: 36px;
   }
 
   /* Liên hệ: 1 cột trên mobile */

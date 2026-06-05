@@ -40,6 +40,11 @@ const customerVideos = [
     title: 'Giọng hát khách hàng cùng micro Alokio',
     src: encodeURI(`${IMG_BASE}/7903425011264.mp4`),
   },
+  {
+    id: 4,
+    title: 'Khách trải nghiệm loa Alokio tại cửa hàng',
+    src: encodeURI(`${IMG_BASE}/7903765725081.mp4`),
+  },
 ];
 
 const productData = [
