@@ -103,3 +103,55 @@ Script được nạp trong `index.html` theo đúng thứ tự đó (không dù
 | Khoảng giá bộ lọc | `PRICE_RANGES` trong `src/business/usecases/FilterUseCase.js` |
 | Số sản phẩm mỗi trang | `PER_PAGE` trong `src/presentation/pages/ProductsPage.js` |
 | Thông tin liên hệ footer | `src/presentation/components/Footer.js` |
+
+## 5. Hướng dẫn chi tiết Thêm / Sửa sản phẩm
+
+Mọi thông tin về sản phẩm của website đều được quản lý tập trung tại file **`src/data/datasource/productData.js`**. Để sửa mô tả hoặc thêm sản phẩm, bạn chỉ cần mở file này lên bằng bất kỳ trình soạn thảo văn bản nào (Notepad, VS Code, v.v.).
+
+### 5.1. Cấu trúc của một sản phẩm
+Trong file `productData.js`, tìm đến mảng `productData`. Mỗi sản phẩm được khai báo dưới dạng một "object" nằm trong cặp ngoặc nhọn `{ ... }`. Ví dụ:
+
+```javascript
+{
+  id: 1, // Mã sản phẩm (nên để số tăng dần, không trùng nhau)
+  name: 'Loa xách tay Alokio V22 - Đen', // Tên hiển thị
+  brand: 'Alokio', // Thương hiệu
+  category: 'Loa xách tay', // Danh mục
+  price: 3290000, // Giá bán hiện tại (để số viết liền, không có dấu phẩy)
+  oldPrice: 3990000, // Giá cũ (giá gạch ngang)
+  description: 'Loa xách tay karaoke Alokio V22...', // Mô tả dài của sản phẩm
+  specs: { // Thông số kỹ thuật (hiện dạng bảng ở trang chi tiết)
+    'Loại loa': 'Loa xách tay karaoke',
+    'Công suất': '800W',
+    'Bảo hành': '12 tháng'
+  },
+  images: img('V22 - Đen', [1, 2, 3]), // Hình ảnh (xem HD thêm ảnh bên dưới)
+  rating: 4.8, // Số sao đánh giá (hiển thị giao diện)
+  stock: 15, // Số lượng tồn kho (khách không thể mua quá số này)
+  featured: true, // true: Hiện ở mục "Sản phẩm nổi bật" trang chủ, false: Ẩn
+}
+```
+
+### 5.2. Cách sửa nội dung (Tên, Giá, Mô tả)
+1. Mở file `src/data/datasource/productData.js`.
+2. Kéo xuống phần `productData = [ ... ]` và tìm sản phẩm bạn muốn sửa.
+3. Sửa thông tin nằm trong cặp dấu nháy đơn `''` hoặc thay đổi các con số:
+   - **Sửa mô tả:** Thay đổi văn bản ở dòng `description: '...'`. Có thể dùng dấu `+` để nối các đoạn văn bản dài cho dễ đọc.
+   - **Sửa giá:** Thay đổi con số ở `price:` và `oldPrice:`. Không nhập dấu chấm hay phẩy (VD: đúng là `3290000`, sai là `3.290.000`).
+   - **Sửa thông số kỹ thuật:** Trong phần `specs: { ... }`, bạn có thể thêm hoặc sửa bất kỳ dòng `"Tên thông số": "Giá trị"` nào.
+
+### 5.3. Cách thêm 1 sản phẩm hoàn toàn mới
+**Bước 1: Chuẩn bị hình ảnh**
+1. Vào thư mục `src/assets/sản phẩm/`
+2. Tạo một thư mục con mới cho sản phẩm, ví dụ đặt tên là `Loa ABC`.
+3. Copy hình ảnh của sản phẩm vào thư mục đó, và đổi tên ảnh thành các con số: `1.png`, `2.png`, `3.png`... (Lưu ý: Bắt buộc dùng đuôi `.png`).
+
+**Bước 2: Thêm dữ liệu vào file**
+1. Mở file `src/data/datasource/productData.js`.
+2. Kéo xuống ngay phía trên dấu `];` cuối cùng của file (đây là nơi kết thúc danh sách sản phẩm).
+3. Đảm bảo sản phẩm trước đó kết thúc bằng dấu phẩy `,`.
+4. Copy toàn bộ một khối mã `{ ... }` của một sản phẩm cũ và dán xuống dưới.
+5. Đổi `id:` thành một số mới chưa từng được sử dụng (ví dụ: `7`).
+6. Sửa tên, giá, mô tả theo ý bạn.
+7. Đổi đường dẫn hình ảnh cho khớp với tên thư mục vừa tạo. Ví dụ thư mục là `Loa ABC` và có 3 ảnh, bạn sửa thành: `images: img('Loa ABC', [1, 2, 3]),`.
+8. Lưu file lại và tải lại (F5) trang web để xem thành quả!
