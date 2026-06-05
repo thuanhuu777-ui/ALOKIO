@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="AlokioStore - Loa xách tay karaoke Alokio chính hãng, tặng kèm micro không dây. Giao hàng miễn phí toàn quốc.">
+  <title>AlokioStore - Loa xách tay karaoke chính hãng</title>
+
+  <!-- Favicon: logo ALOKIO (icon hiện trên tab trình duyệt) -->
+  <link rel="icon" type="image/png"
+        href="https://i.postimg.cc/0j2LkcVv/logo-2-1.png">
+  <link rel="apple-touch-icon"
+        href="https://i.postimg.cc/0j2LkcVv/logo-2-1.png">
+
+  <!-- Styles (Presentation Layer) -->
+  <link rel="stylesheet" href="src/presentation/styles/base.css">
+  <link rel="stylesheet" href="src/presentation/styles/components.css">
+  <link rel="stylesheet" href="src/presentation/styles/responsive.css">
+</head>
+<body>
+  <!--
+    KHÔNG có dữ liệu cứng trong HTML.
+    Toàn bộ nội dung được render động bằng JavaScript:
+    - Header / Footer: component tự render
+    - #app: nội dung từng trang do Router quyết định
+  -->
+  <header class="header" id="header"></header>
+
+  <main id="app"></main>
+
+  <footer class="footer" id="footer"></footer>
+
+  <!--
+    Nạp JavaScript theo đúng thứ tự phụ thuộc Clean Architecture:
+    Data Layer -> Business Layer -> Presentation Layer -> app.js
+    (Dùng script thường, KHÔNG dùng ES Module, để có thể mở thẳng
+    file index.html bằng trình duyệt mà không cần web server)
+  -->
+  <!-- 1. Data Layer -->
+  <script src="src/data/datasource/storeInfo.js"></script>
+  <script src="src/data/datasource/productData.js"></script>
+  <script src="src/data/models/Product.js"></script>
+  <script src="src/data/models/CartItem.js"></script>
+  <script src="src/data/repositories/ProductRepository.js"></script>
+  <script src="src/data/repositories/CartRepository.js"></script>
+
+  <!-- 2. Business Layer -->
+  <script src="src/business/services/ProductService.js"></script>
+  <script src="src/business/services/CartService.js"></script>
+  <script src="src/business/usecases/SearchUseCase.js"></script>
+  <script src="src/business/usecases/FilterUseCase.js"></script>
+  <script src="src/business/usecases/SortUseCase.js"></script>
+  <script src="src/business/validators/CheckoutValidator.js"></script>
+
+  <!-- 3. Presentation Layer -->
+  <script src="src/presentation/components/uiHelpers.js"></script>
+  <script src="src/presentation/components/Toast.js"></script>
+  <script src="src/presentation/components/ProductCard.js"></script>
+  <script src="src/presentation/components/Header.js"></script>
+  <script src="src/presentation/components/Footer.js"></script>
+  <script src="src/presentation/components/CartSidebar.js"></script>
+  <script src="src/presentation/components/ChatBubbles.js"></script>
+  <script src="src/presentation/pages/HomePage.js"></script>
+  <script src="src/presentation/pages/ProductsPage.js"></script>
+  <script src="src/presentation/pages/ProductDetailPage.js"></script>
+  <script src="src/presentation/pages/CheckoutPage.js"></script>
+  <script src="src/presentation/pages/ContactPage.js"></script>
+
+  <!-- 4. Khởi động ứng dụng -->
+  <script src="src/presentation/app.js"></script>
+</body>
+</html>

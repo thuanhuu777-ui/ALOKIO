@@ -1,0 +1,500 @@
+/* ============================================================
+   BASE.CSS - Biến màu, reset, layout chung, header, footer,
+   hero banner, nút bấm, animation. (Dark mode qua [data-theme])
+   ============================================================ */
+
+/* ---------- 1. Biến thiết kế (Design tokens) ---------- */
+:root {
+  --primary: #0F172A;     /* Xanh đen - màu chủ đạo */
+  --secondary: #2563EB;   /* Xanh dương - nhấn mạnh */
+  --accent: #F97316;      /* Cam - CTA, khuyến mãi */
+  --bg: #F8FAFC;          /* Nền trang */
+  --surface: #FFFFFF;     /* Nền card / panel */
+  --text: #0F172A;        /* Chữ chính */
+  --text-muted: #64748B;  /* Chữ phụ */
+  --border: #E2E8F0;      /* Viền */
+  --star: #FACC15;        /* Màu sao đánh giá */
+  --danger: #DC2626;      /* Lỗi */
+  --success: #16A34A;     /* Thành công */
+
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(15, 23, 42, .08), 0 4px 14px rgba(15, 23, 42, .06);
+  --shadow-lg: 0 8px 30px rgba(15, 23, 42, .14);
+  --transition: .25s ease;
+
+  --header-h: 70px;
+}
+
+/* Dark Mode: ghi đè biến màu khi <html data-theme="dark"> */
+[data-theme="dark"] {
+  --bg: #0B1120;
+  --surface: #16213A;
+  --text: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border: #28344E;
+  --primary: #E2E8F0;
+  --shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 4px 14px rgba(0, 0, 0, .3);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, .5);
+}
+
+/* ---------- 2. Reset ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+  /* Chừa chỗ cho header cố định */
+  padding-top: var(--header-h);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- 3. Layout chung ---------- */
+.container {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 3rem;
+}
+
+.section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section__title {
+  font-size: 1.6rem;
+  margin-bottom: .5rem;
+}
+
+.section__link {
+  color: var(--secondary);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: opacity var(--transition);
+}
+
+.section__link:hover {
+  opacity: .75;
+}
+
+.section--promo {
+  background: linear-gradient(135deg, rgba(249, 115, 22, .08), rgba(37, 99, 235, .08));
+}
+
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- 4. Nút bấm ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: transform var(--transition), box-shadow var(--transition),
+              background var(--transition), color var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn--accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--secondary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn--outline {
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
+  background: transparent;
+}
+
+.btn--outline:hover {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn--disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.btn--disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.btn--lg {
+  padding: .85rem 2rem;
+  font-size: 1.05rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ---------- 5. Header ---------- */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 100;
+  transition: background var(--transition);
+}
+
+.header__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Logo cửa hàng (ảnh) */
+.header__logo-img {
+  height: 40px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.header__nav {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.header__nav a {
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: .3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+
+.header__nav a:hover,
+.header__nav a.active {
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.header__search {
+  flex: 1;
+  display: flex;
+  max-width: 340px;
+  margin-left: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.header__search:focus-within {
+  border-color: var(--secondary);
+}
+
+.header__search input {
+  flex: 1;
+  min-width: 0;
+  padding: .55rem .9rem;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.header__search button {
+  padding: 0 .9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.header__icon-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  transition: background var(--transition);
+}
+
+.header__icon-btn:hover {
+  background: var(--bg);
+}
+
+.header__cart-badge {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__cart-badge.hidden {
+  display: none;
+}
+
+/* Icon theme: chỉ hiện 1 trong 2 */
+.theme-icon-dark { display: none; }
+[data-theme="dark"] .theme-icon-dark { display: inline; }
+[data-theme="dark"] .theme-icon-light { display: none; }
+
+/* Hamburger (ẩn trên desktop) */
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+}
+
+.header__hamburger span {
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.header__hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.header__hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.header__hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- 6. Hero Banner ---------- */
+.hero {
+  background: linear-gradient(125deg, #0F172A 35%, #1D3A8A 75%, #2563EB);
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr; /* Ưu tiên diện tích cho ảnh banner */
+  align-items: center;
+  gap: 2.5rem;
+  padding-block: 4.5rem;
+}
+
+.hero__tag {
+  display: inline-block;
+  background: rgba(249, 115, 22, .18);
+  color: #FDBA74;
+  border: 1px solid rgba(249, 115, 22, .45);
+  padding: .25rem .9rem;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  color: #CBD5E1;
+  max-width: 48ch;
+  margin-bottom: 1.75rem;
+}
+
+.hero__cta {
+  display: flex;
+  gap: .9rem;
+  flex-wrap: wrap;
+}
+
+.hero .btn--outline {
+  border-color: rgba(255, 255, 255, .55);
+  color: #fff;
+}
+
+.hero .btn--outline:hover {
+  background: rgba(255, 255, 255, .12);
+}
+
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ảnh lớn của trang web (website/img/picture.jpg) */
+.hero__image {
+  width: 100%;
+  max-width: none; /* Chiếm trọn cột bên phải của hero */
+  border-radius: var(--radius);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .45);
+  border: 3px solid rgba(255, 255, 255, .15);
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.hero__image:hover {
+  transform: scale(1.02);
+}
+
+/* ---------- 7. Footer ---------- */
+.footer {
+  background: #0F172A;
+  color: #CBD5E1;
+  margin-top: 3rem;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-block: 3rem;
+}
+
+.footer__title {
+  color: #fff;
+  margin-bottom: .9rem;
+  font-size: 1.05rem;
+}
+
+.footer__col li {
+  margin-bottom: .5rem;
+}
+
+.footer__col a:hover {
+  color: var(--accent);
+}
+
+.footer__bottom {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  font-size: .85rem;
+  color: #64748B;
+}
+
+/* ---------- 8. Animation ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: .8; }
+  50%      { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+.fade-in  { animation: fadeIn .45s ease both; }
+.slide-in { animation: slideIn .55s ease both; }
