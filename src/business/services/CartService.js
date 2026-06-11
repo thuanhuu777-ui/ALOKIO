@@ -1,15 +1,3 @@
-/**
- * ============================================================
- * BUSINESS LAYER - Service: CartService
- * Toàn bộ nghiệp vụ giỏ hàng: thêm / xóa / cập nhật số lượng /
- * tính tổng tiền. Tự đồng bộ với LocalStorage qua CartRepository.
- *
- * Áp dụng Observer pattern: UI đăng ký subscribe() để
- * tự re-render mỗi khi giỏ hàng thay đổi.
- * ============================================================
- */
-/* global CartItem */
-
 class CartService {
   /**
    * @param {import('../../data/repositories/CartRepository.js').CartRepository} cartRepository

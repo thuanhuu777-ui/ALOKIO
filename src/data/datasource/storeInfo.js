@@ -27,8 +27,20 @@ const STORE_INFO = {
   mapShareLink: 'https://maps.app.goo.gl/yUSPdzUE7ujLzTQB6',
 
   phone: '0382.181.317',
-  email: 'vualoakeo@gmail.com',
+  email: 'thuanhuu777@gmail.com',
   workingHours: 'Thứ 2 - Chủ nhật: 8:00 - 21:00',
+
+  /**
+   * Thông tin thanh toán chuyển khoản (hiện ở bước thanh toán).
+   * Chính sách: KHÁCH THANH TOÁN TRƯỚC - CỬA HÀNG GỬI HÀNG SAU.
+   */
+  payment: {
+    bank: 'Vietcombank',
+    accountName: 'NGUYEN HUU THUAN',
+    accountNumber: '1051000275760',
+    branch: 'Trụ sở CN Bắc Gia Lai',
+    qrImage: 'src/assets/images/QR_thanhtoan.jpg',
+  },
 
   /** Mạng xã hội - 4 bóng chat góc dưới phải */
   socials: {

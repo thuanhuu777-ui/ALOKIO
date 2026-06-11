@@ -698,6 +698,104 @@
   color: var(--success);
 }
 
+/* ---------- 8b. Thanh toán QR (thanh toán trước - gửi hàng sau) ---------- */
+.payment-policy {
+  margin-top: .9rem;
+  font-size: .88rem;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: .7rem .9rem;
+}
+
+.payment-layout {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.payment-qr {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.payment-qr img {
+  width: 100%;
+  max-width: 340px;
+  margin-inline: auto;
+  border-radius: var(--radius);
+}
+
+.payment-qr__hint {
+  margin-top: .8rem;
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+
+.payment-info {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.payment-info h3 {
+  margin-bottom: 1rem;
+}
+
+.payment-row {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .6rem 0;
+  border-bottom: 1px dashed var(--border);
+  flex-wrap: wrap;
+}
+
+.payment-row span {
+  width: 120px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+
+.payment-amount {
+  color: var(--accent);
+  font-size: 1.35rem;
+}
+
+.btn-copy {
+  margin-left: auto;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  border-radius: 8px;
+  padding: .2rem .6rem;
+  transition: all var(--transition);
+}
+
+.btn-copy:hover {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.payment-notice {
+  margin: 1rem 0 1.2rem;
+  background: rgba(249, 115, 22, .08);
+  border: 1px solid rgba(249, 115, 22, .35);
+  border-radius: 10px;
+  padding: .8rem 1rem;
+  font-size: .9rem;
+}
+
 /* ---------- 9. Toast Notification ---------- */
 .toast-container {
   position: fixed;
@@ -1009,28 +1107,6 @@
 .chat-bubble--tiktok   { background: #010101; }
 .chat-bubble--shopee   { background: #EE4D2D; }
 
-/* Viền trắng mảnh cho TikTok nổi trên nền tối (dark mode) */
-.chat-bubble--tiktok {
-  border: 1px solid rgba(255, 255, 255, .35);
-}
-
-.chat-bubble__text {
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .02em;
-}
-
-/* Hiệu ứng vòng sóng lan tỏa ở quả Zalo (quả đầu - hay dùng nhất) */
-.chat-bubble--zalo::after {
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #0068FF;
-  animation: bubbleRing 1.8s ease-out infinite;
-}
-
 @keyframes bubblePop {
   from { opacity: 0; transform: scale(.4) translateY(20px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -1055,4 +1131,152 @@
 
 .empty-state .btn {
   margin-top: .5rem;
+}
+
+/* ---------- 15. Articles / Tin tức ---------- */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.article-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.article-card__img-link {
+  display: block;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.article-card__img-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.article-card:hover .article-card__img-link img {
+  transform: scale(1.05);
+}
+
+.article-card__content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.article-card__title {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.article-card__title a:hover {
+  color: var(--secondary);
+}
+
+.article-card__date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.article-card__summary {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.article-card__readmore {
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  align-self: flex-start;
+}
+
+.article-card__readmore:hover {
+  text-decoration: underline;
+}
+
+.article-detail {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-detail__header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.article-detail__title {
+  font-size: 2rem;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.article-detail__date {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.article-detail__image {
+  margin-bottom: 2rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.article-detail__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.article-detail__body {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 3rem;
+}
+
+.article-detail__footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.article-detail__body h3 {
+  font-size: 1.35rem;
+  color: var(--secondary);
+  margin: 1.8rem 0 0.8rem;
+  line-height: 1.35;
+}
+
+.article-detail__body p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: var(--text);
 }

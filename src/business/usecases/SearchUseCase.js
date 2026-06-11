@@ -1,18 +1,9 @@
-/**
- * ============================================================
- * BUSINESS LAYER - UseCase: SearchUseCase
- * Tìm kiếm sản phẩm theo TÊN hoặc THƯƠNG HIỆU.
- * Hỗ trợ tìm không dấu (ví dụ: "may" vẫn khớp "máy").
- * ============================================================
- */
 class SearchUseCase {
   /**
    * Chuẩn hóa chuỗi: thường hóa + bỏ dấu tiếng Việt.
    * @param {string} str
    */
   _normalize(str) {
-    // normalize('NFD') tách dấu khỏi ký tự gốc, sau đó loại bỏ
-    // các ký tự dấu (combining marks, mã Unicode 0x0300 - 0x036F)
     const decomposed = String(str).toLowerCase().normalize('NFD');
     let result = '';
     for (const ch of decomposed) {

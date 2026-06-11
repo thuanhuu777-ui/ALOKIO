@@ -30,10 +30,10 @@ class ContactPage {
     container.innerHTML = `
       <div class="container section fade-in">
         <h1 class="page-title">Liên hệ với chúng tôi</h1>
-        <p class="contact-intro">
-          Hãy ghé cửa hàng để nghe thử loa trực tiếp, hoặc gửi tin nhắn -
-          ${escapeHtml(info.name)} sẽ phản hồi trong thời gian sớm nhất.
-        </p>
+       <p class="contact-intro">
+    Hãy ghé cửa hàng để nghe thử loa trực tiếp, hoặc gửi tin nhắn -
+    ${info.name} sẽ phản hồi trong thời gian sớm nhất. Xin chân thành cảm ơn quý khách.
+</p>
 
         <!-- 4 ô thông tin liên hệ -->
         <div class="contact-grid">
@@ -65,11 +65,11 @@ class ContactPage {
             <h3>Gửi tin nhắn cho cửa hàng</h3>
             <div class="form-group">
               <label for="ct-name">Họ và tên *</label>
-              <input type="text" id="ct-name" placeholder="Nguyễn Văn A">
+              <input type="text" id="ct-name" placeholder="Nguyễn Hữu Thuận">
             </div>
             <div class="form-group">
               <label for="ct-phone">Số điện thoại *</label>
-              <input type="tel" id="ct-phone" placeholder="0912345678">
+              <input type="tel" id="ct-phone" placeholder="0123456780">
             </div>
             <div class="form-group">
               <label for="ct-message">Nội dung *</label>

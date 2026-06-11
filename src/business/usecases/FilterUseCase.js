@@ -1,19 +1,7 @@
-/**
- * ============================================================
- * BUSINESS LAYER - UseCase: FilterUseCase
- * Lọc sản phẩm theo DÒNG LOA (category) và KHOẢNG GIÁ.
- * (Cửa hàng hiện bán 1 thương hiệu Alokio nên bộ lọc "hãng"
- * được thay bằng "dòng loa"; vẫn hỗ trợ lọc brands nếu sau này
- * nhập thêm thương hiệu khác.)
- * ============================================================
- */
-
-/** Các khoảng giá định nghĩa sẵn cho bộ lọc */
 const PRICE_RANGES = [
   { id: 'all', label: 'Tất cả mức giá', min: 0, max: Infinity },
   { id: 'under-3m', label: 'Dưới 3 triệu', min: 0, max: 3000000 },
   { id: '3m-4m', label: '3 - 4 triệu', min: 3000000, max: 4000000 },
-  { id: 'over-4m', label: 'Trên 4 triệu', min: 4000000, max: Infinity },
 ];
 
 class FilterUseCase {

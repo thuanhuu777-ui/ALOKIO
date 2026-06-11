@@ -88,10 +88,11 @@
     position: static;
   }
 
-  /* Chi tiết & checkout: 1 cột */
+  /* Chi tiết & checkout & thanh toán QR: 1 cột */
   .detail,
   .detail-skeleton,
-  .checkout-layout {
+  .checkout-layout,
+  .payment-layout {
     grid-template-columns: 1fr;
   }
 

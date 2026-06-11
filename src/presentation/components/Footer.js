@@ -22,17 +22,17 @@ class Footer {
       <div class="footer__inner container">
         <div class="footer__col">
           <h4 class="footer__title">${info.name}</h4>
-          <p>Chuyên loa xách tay karaoke ${info.name} chính hãng, tặng kèm
-          micro không dây. Âm thanh đỉnh cao - giá tốt mỗi ngày.</p>
+          <p>Chuyên Loa Xách Tay Karaoke ${info.name} Chính Hãng, tặng kèm
+          micro không dây.<br>Âm thanh đỉnh cao - Giá tốt mỗi ngày.</p>
         </div>
 
         <div class="footer__col">
           <h4 class="footer__title">Chính sách</h4>
           <ul>
             <li><a href="#/">Bảo hành chính hãng 12 tháng</a></li>
-            <li><a href="#/">Đổi trả trong 7 ngày</a></li>
+            <li><a href="#/">Đổi trả trong 15 ngày</a></li>
             <li><a href="#/">Giao hàng miễn phí toàn quốc</a></li>
-            <li><a href="#/">Trả góp 0% lãi suất</a></li>
+            <li><a href="#/">Trả góp 0%</a></li> 
           </ul>
         </div>
 
@@ -52,7 +52,7 @@ class Footer {
         </div>
       </div>
       <div class="footer__bottom">
-        © ${new Date().getFullYear()} ${info.name}. Thiết kế bởi đội ngũ ${info.name}.
+        © ${new Date().getFullYear()} ${info.name}. Design By Group 2 - ${info.name}.
       </div>
     `;
   }

@@ -39,6 +39,7 @@ class Header {
         <nav class="header__nav" id="nav-menu">
           <a href="#/" data-nav="home">Trang chủ</a>
           <a href="#/products" data-nav="products">Sản phẩm</a>
+          <a href="#/articles" data-nav="articles">Tin tức</a>
           <a href="#/contact" data-nav="contact">Liên hệ</a>
         </nav>
 
@@ -55,10 +56,6 @@ class Header {
         </form>
 
         <div class="header__actions">
-          <button class="header__icon-btn" id="theme-toggle" aria-label="Đổi giao diện sáng/tối">
-            <span class="theme-icon-light">☀</span>
-            <span class="theme-icon-dark">☾</span>
-          </button>
           <button class="header__icon-btn header__cart-btn" id="cart-btn" aria-label="Giỏ hàng">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -111,13 +108,6 @@ class Header {
       if (e.target.tagName === 'A') this._closeMobileMenu();
     });
 
-    // Dark mode: đổi theme + lưu lựa chọn vào LocalStorage
-    this.el.querySelector('#theme-toggle').addEventListener('click', () => {
-      const root = document.documentElement;
-      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
-      localStorage.setItem('soundhub_theme', next);
-    });
   }
 
   /** Đóng menu mobile */
@@ -142,6 +132,7 @@ class Header {
       const isActive =
         (key === 'home' && path === '/') ||
         (key === 'products' && path.startsWith('/product')) ||
+        (key === 'articles' && path.startsWith('/article')) ||
         (key === 'contact' && path === '/contact');
       a.classList.toggle('active', isActive);
     });

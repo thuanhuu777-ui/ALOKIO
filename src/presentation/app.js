@@ -16,7 +16,8 @@
  * ============================================================
  */
 
-/* global ProductRepository, CartRepository, ProductService, CartService,
+/* global ProductRepository, CartRepository, OrderRepository,
+   ProductService, CartService, OrderService,
    SearchUseCase, FilterUseCase, SortUseCase, CheckoutValidator,
    Header, Footer, CartSidebar, ChatBubbles, Toast, FALLBACK_IMAGE,
    STORE_INFO, STORE_MAP_EMBED_URL, STORE_MAP_LINK,
@@ -27,10 +28,14 @@ class App {
     // ===== 1. Data Layer =====
     const productRepository = new ProductRepository();
     const cartRepository = new CartRepository();
+    const orderRepository = new OrderRepository();
+    const articleRepository = new ArticleRepository();
 
     // ===== 2. Business Layer =====
     this.productService = new ProductService(productRepository);
     this.cartService = new CartService(cartRepository, productRepository);
+    this.orderService = new OrderService(orderRepository);
+    this.articleService = new ArticleService(articleRepository);
     this.searchUseCase = new SearchUseCase();
     this.filterUseCase = new FilterUseCase();
     this.sortUseCase = new SortUseCase();
@@ -51,7 +56,10 @@ class App {
 
     // Bảng định tuyến: path -> page instance
     this.pages = {
-      home: new HomePage({ productService: this.productService }),
+      home: new HomePage({ 
+        productService: this.productService,
+        articleService: this.articleService 
+      }),
       products: new ProductsPage({
         productService: this.productService,
         searchUseCase: this.searchUseCase,
@@ -62,9 +70,17 @@ class App {
         productService: this.productService,
         cartService: this.cartService,
       }),
+      articles: new ArticlesPage({
+        articleService: this.articleService,
+      }),
+      articleDetail: new ArticleDetailPage({
+        articleService: this.articleService,
+      }),
       checkout: new CheckoutPage({
         cartService: this.cartService,
         validator: this.checkoutValidator,
+        payment: STORE_INFO.payment,
+        orderService: this.orderService,
       }),
       contact: new ContactPage({
         storeInfo: STORE_INFO,
@@ -155,6 +171,7 @@ class App {
 
     // So khớp route
     const detailMatch = path.match(/^\/product\/(\d+)$/);
+    const articleMatch = path.match(/^\/article\/(\d+)$/);
 
     if (path === '/' || path === '') {
       await this.pages.home.render(this.main);
@@ -162,6 +179,10 @@ class App {
       await this.pages.products.render(this.main, query);
     } else if (detailMatch) {
       await this.pages.productDetail.render(this.main, query, detailMatch[1]);
+    } else if (path === '/articles') {
+      await this.pages.articles.render(this.main);
+    } else if (articleMatch) {
+      await this.pages.articleDetail.render(this.main, query, articleMatch[1]);
     } else if (path === '/checkout') {
       await this.pages.checkout.render(this.main);
     } else if (path === '/contact') {

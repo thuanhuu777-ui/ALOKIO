@@ -10,9 +10,11 @@ class HomePage {
   /**
    * @param {Object} deps
    * @param {import('../../business/services/ProductService.js').ProductService} deps.productService
+   * @param {import('../../business/services/ArticleService.js').ArticleService} deps.articleService
    */
-  constructor({ productService }) {
+  constructor({ productService, articleService }) {
     this.productService = productService;
+    this.articleService = articleService;
   }
 
   /**
@@ -27,9 +29,9 @@ class HomePage {
         <div class="hero__inner container">
           <div class="hero__content slide-in">
             <span class="hero__tag">Loa xách tay karaoke Alokio chính hãng</span>
-            <h1>Âm thanh đỉnh cao<br>cho mọi cuộc vui</h1>
-            <p>Loa xách tay karaoke công suất tới 900W, tặng kèm combo
-            2 micro không dây. Giao hàng miễn phí toàn quốc, bảo hành 12 tháng.</p>
+            <h1>Âm Thanh Bùng Nổ<br>Kết Nối Mọi Cuộc Vui</h1>
+            <p>Không chỉ là những thiết bị âm thanh, chúng tôi mang đến những trải
+            nghiệm giải trí tiện lợi, hiện đại và đáng tin cậy cho mọi gia đình Việt.</p>
             <div class="hero__cta">
               <a href="#/products" class="btn btn--accent btn--lg">Mua ngay</a>
               <a href="#/products" class="btn btn--outline btn--lg">Xem tất cả sản phẩm</a>
@@ -66,10 +68,21 @@ class HomePage {
         </div>
       </section>
 
+      <!-- Bài viết nổi bật -->
+      <section class="section container">
+        <div class="section__head">
+          <h2 class="section__title">Tin Tức & Bài Viết Mới</h2>
+          <a href="#/articles" class="section__link">Xem tất cả →</a>
+        </div>
+        <div class="articles-grid" id="home-articles">
+          <p style="text-align:center; width:100%;">Đang tải...</p>
+        </div>
+      </section>
+
       <!-- Video khách hàng trải nghiệm (carousel: 3 video / lần) -->
       <section class="section container">
         <div class="section__head">
-          <h2 class="section__title">Khách hàng hát thử tại cửa hàng</h2>
+          <h2 class="section__title">Chất Âm Loa Xách Tay Alokio</h2>
         </div>
         <div class="video-carousel" id="video-carousel">
           <button class="video-carousel__btn" id="video-prev"
@@ -85,12 +98,16 @@ class HomePage {
     `;
 
     // Carousel video khách hát (dữ liệu từ Business Layer)
-    this._initVideoCarousel(container, this.productService.getCustomerVideos());
+    this._initVideoCarousel(
+      container,
+      await this.productService.getCustomerVideos()
+    );
 
     // ---- 2. Lấy dữ liệu từ Business Layer rồi render thật ----
-    const [featured, discounted] = await Promise.all([
+    const [featured, discounted, articles] = await Promise.all([
       this.productService.getFeaturedProducts(),
       this.productService.getDiscountedProducts(),
+      this.articleService.getAllArticles(),
     ]);
 
     // Sản phẩm nổi bật
@@ -106,6 +123,31 @@ class HomePage {
         .sort((a, b) => b.discountPercent - a.discountPercent)
         .slice(0, 4);
       promoEl.innerHTML = topDeals.map((p) => ProductCard.html(p)).join('');
+    }
+
+    // Bài viết nổi bật: hiển thị 4 bài mới nhất
+    const articlesEl = container.querySelector('#home-articles');
+    if (articlesEl && articles) {
+      const topArticles = articles.slice(0, 4);
+      if (topArticles.length > 0) {
+        articlesEl.innerHTML = topArticles.map(article => `
+          <article class="article-card">
+            <a href="#/article/${article.id}" class="article-card__img-link">
+              <img src="${mediaUrl(article.imageUrl)}" alt="${article.title}" loading="lazy">
+            </a>
+            <div class="article-card__content">
+              <h3 class="article-card__title">
+                <a href="#/article/${article.id}">${article.title}</a>
+              </h3>
+              <p class="article-card__date">${article.createdAt.toLocaleDateString('vi-VN')}</p>
+              <p class="article-card__summary">${article.summary}</p>
+              <a href="#/article/${article.id}" class="article-card__readmore">Đọc tiếp</a>
+            </div>
+          </article>
+        `).join('');
+      } else {
+        articlesEl.innerHTML = '<p style="text-align:center; width:100%;">Hiện chưa có bài viết nào.</p>';
+      }
     }
   }
 

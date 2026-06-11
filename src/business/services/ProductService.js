@@ -1,11 +1,3 @@
-/**
- * ============================================================
- * BUSINESS LAYER - Service: ProductService
- * Nghiệp vụ liên quan đến sản phẩm: lấy danh sách, sản phẩm
- * nổi bật, chi tiết, thương hiệu, phân trang.
- * Chỉ phụ thuộc vào Data Layer (Repository), KHÔNG biết gì về UI.
- * ============================================================
- */
 class ProductService {
   /**
    * @param {import('../../data/repositories/ProductRepository.js').ProductRepository} productRepository
@@ -36,18 +28,18 @@ class ProductService {
     return this.repo.getById(id);
   }
 
-  /** Danh sách thương hiệu (cho bộ lọc + section trang chủ) */
-  getBrands() {
+  /** Danh sách thương hiệu (không trùng lặp) */
+  async getBrands() {
     return this.repo.getBrands();
   }
 
-  /** Danh sách dòng loa (cho bộ lọc + section trang chủ) */
-  getCategories() {
+  /** Danh sách dòng loa (không trùng lặp) */
+  async getCategories() {
     return this.repo.getCategories();
   }
 
-  /** Video khách hàng trải nghiệm (section video trang chủ) */
-  getCustomerVideos() {
+  /** Video khách hàng trải nghiệm (carousel trang chủ) */
+  async getCustomerVideos() {
     return this.repo.getCustomerVideos();
   }
 

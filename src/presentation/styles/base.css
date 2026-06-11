@@ -25,18 +25,6 @@
   --header-h: 70px;
 }
 
-/* Dark Mode: ghi đè biến màu khi <html data-theme="dark"> */
-[data-theme="dark"] {
-  --bg: #0B1120;
-  --surface: #16213A;
-  --text: #E2E8F0;
-  --text-muted: #94A3B8;
-  --border: #28344E;
-  --primary: #E2E8F0;
-  --shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 4px 14px rgba(0, 0, 0, .3);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, .5);
-}
-
 /* ---------- 2. Reset ---------- */
 *,
 *::before,
